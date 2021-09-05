@@ -47,6 +47,8 @@ app.controller("mainCtrl", function($scope) {
         provider = window.ethereum;
       } else if (typeof window.web3 !== 'undefined') {
         provider = window.web3.currentProvider;
+      } else {
+        provider = 'https://bsc-dataseed1.binance.org:443';
       }
 
       if (provider) {
