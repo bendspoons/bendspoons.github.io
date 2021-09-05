@@ -52,7 +52,7 @@ app.controller("mainCtrl", function($scope) {
       }
 
       if (provider) {
-        console.log('Provider found!');
+        console.log('Provider found!', provider);
         web3 = new Web3(provider);
         contract = new web3.eth.Contract(JSON.parse(data.result), $scope.data.tokenAddress);
 
