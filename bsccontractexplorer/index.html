@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" ng-app="contractScan">
+  <head>
+    <meta charset="utf-8">
+    <title>xxx</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <script type="text/javascript" src="web3.min.js"></script>
+    <script type="text/javascript" src="jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  </head>
+  <body>
+
+    <div class="container mt-3" ng-controller="mainCtrl">
+      <h1>Contract Explorer </h1>
+      <p ng-if="data.started">
+        Name: {{data.info.name}} | Symbol: {{data.info.symbol}} | Contract: {{data.tokenAddress}}
+      </p>
+
+      <div ng-if="!data.started">
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">BSC Token Contract</span>
+          <input type="text" class="form-control" placeholder="Contract" ng-model="data.tokenAddress">
+          <button class="btn btn-outline-secondary" ng-click="startNewSearch()" ng-disabled="!data.tokenAddress" type="button" id="button-addon2">Start</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="card mb-4" ng-repeat="possibleCall in data.functions.read track by $index" ng-if="possibleCall.readOnly"v>
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col">
+              <small class="d-block"><ins>FUNCTION {{possibleCall.stateMutability}}</ins></small>
+              <strong class="d-block">{{possibleCall.name}}</strong>
+              <button type="button" ng-if="possibleCall.readOnly" class="btn btn-sm btn-dark mt-2" name="button" ng-click="executeFunction(possibleCall)">Ergebnis laden</button>
+            </div>
+
+            <div class="col">
+              <div ng-if="possibleCall.result">
+                <div ng-if="possibleCall.result.string">
+                  <small class="d-block"><ins>RESULT</ins></small>
+                  <strong>{{possibleCall.result.string}}</strong>
+
+                  <div ng-if="possibleCall.resultConverted">
+                    <div ng-if="possibleCall.resultConverted.decimals">
+                      <strong>{{possibleCall.resultConverted.result | number}}</strong>
+                      <small> with {{possibleCall.resultConverted.decimals}} decimals</small>
+                    </div>
+                    <div ng-if="possibleCall.resultConverted.address">
+                      <a ng-href="https://bscscan.com/address/{{possibleCall.resultConverted.address}}" target="_blank">Address @BSCscan</a>
+                    </div>
+                    <div ng-if="possibleCall.resultConverted.date">
+                      {{possibleCall.resultConverted.date}}
+                    </div>
+                    <div ng-if="possibleCall.resultConverted.timeleft">
+                      {{possibleCall.resultConverted.timeleft.days}}d {{possibleCall.resultConverted.timeleft.hours}}h {{possibleCall.resultConverted.timeleft.minutes}}m {{possibleCall.resultConverted.timeleft.seconds}}s
+                    </div>
+                  </div>
+
+                  <div class="">
+                    <small>
+                      Convert:
+                      <a href="javascript:;" ng-click="convertFunction('tokendecimals', possibleCall)">Token decimals ({{data.decimals.token}})</a>
+                      <a href="javascript:;" ng-click="convertFunction('bnbdecimals', possibleCall)">BNB decimals ({{data.decimals.bnb}})</a>
+                      <a href="javascript:;" ng-click="convertFunction('date', possibleCall)">Date</a>
+                      <a href="javascript:;" ng-click="convertFunction('remaining', possibleCall)">Remaining time</a>
+                      <a href="javascript:;" ng-click="convertFunction('address', possibleCall)">BSCscan</a>
+                    </small>
+                  </div>
+                </div>
+
+                <div ng-if="!possibleCall.result.string">
+                  <small class="d-block"><ins>RESULT</ins></small>
+                  <!--<pre>{{possibleCall.result | json}}</pre>-->
+                  <div ng-repeat="(k,v) in possibleCall.result track by $index" ng-if="k.length > 1">
+                    <strong>{{k}}</strong> {{v}}
+                  </div>
+                </div>
+
+              </div>
+
+              <div ng-if="possibleCall.callError">
+                {{possibleCall.callError}}
+              </div>
+            </div>
+
+            <div class="col">
+              <div ng-if="possibleCall.inputs.length > 0">
+                <small class="d-block mb-1"><ins>NEEDED PARAMS</ins></small>
+                <div ng-repeat="inputParam in possibleCall.inputs track by $index">
+                  <input class="form-control" type="text" ng-model="inputParam.value" placeholder="{{inputParam.name || '---'}} ({{inputParam.type}})" value="">
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div ng-if="possibleCall.outputs.length > 0">
+                <small class="d-block"><ins>EXPECTED OUTPUT</ins></small>
+                <div ng-repeat="inputParam in possibleCall.outputs track by $index">
+                  <strong>{{inputParam.name}}</strong> <small><em>{{inputParam.type}}</em></small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!--<pre>{{data | json}}</pre>-->
+
+    </div>
+
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
