@@ -59,6 +59,18 @@ app.controller("mainCtrl", function($scope) {
         provider.on('error', function (e) {
           console.log('error', e);
         });
+        provider.on('chainChanged', function (e) {
+          console.log('chainChanged', e);
+        });
+        provider.on('accountsChanged', function (e) {
+          console.log('accountsChanged', e);
+        });
+        provider.on('disconnect', function (e) {
+          console.log('disconnected', e);
+        });
+        provider.on('connect', function (e) {
+          console.log('connect', e);
+        });
 
         if (provider.isConnected()) {
           console.log('provider.isConnected()');
