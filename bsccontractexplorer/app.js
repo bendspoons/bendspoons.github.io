@@ -48,7 +48,7 @@ app.controller("mainCtrl", function($scope) {
       } else if (typeof window.web3 !== 'undefined') {
         provider = window.web3.currentProvider;
       } else {
-        provider = 'https://bsc-dataseed1.binance.org:443';
+        provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
       }
 
       if (provider) {
