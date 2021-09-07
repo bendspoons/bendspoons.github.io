@@ -9,7 +9,7 @@ app.controller("mainCtrl", function($scope) {
   $scope.data = {
     'started'       : false,
     'bscscanAPIKey' : 'NHANXGTK4Z97VHSMSWC3A2SH3526RRC9W7',
-    'tokenAddress'  : '',
+    'tokenAddress'  : '0x97c6825e6911578a515b11e25b552ecd5fe58dba',
     'abi'           : '',
     'info'          : {
       'name'    : '',
@@ -44,10 +44,13 @@ app.controller("mainCtrl", function($scope) {
       //console.log('!!!contractABI', 'JSON.parse($scope.data.abi)', JSON.parse($scope.data.abi))
 
       if (typeof window.ethereum !== 'undefined') {
+        console.log('window.ethereum')
         provider = window.ethereum;
       } else if (typeof window.web3 !== 'undefined') {
+        console.log('window.web3')
         provider = window.web3.currentProvider;
       } else {
+        console.log('HttpProvider')
         provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
       }
 
@@ -56,6 +59,7 @@ app.controller("mainCtrl", function($scope) {
         web3 = new Web3(provider);
         contract = new web3.eth.Contract(JSON.parse(data.result), $scope.data.tokenAddress);
 
+        /*
         provider.on('error', function (e) {
           console.log('error', e);
         });
@@ -73,6 +77,7 @@ app.controller("mainCtrl", function($scope) {
         });
 
         if (provider.isConnected()) {
+        */
           console.log('provider.isConnected()');
 
           var abiParsed = JSON.parse($scope.data.abi);
@@ -117,9 +122,11 @@ app.controller("mainCtrl", function($scope) {
             console.log('!!!symbol', '=>', e)
           })
 
+        /*
         } else {
           console.log('Provider not connected');
         }
+        */
       } else {
           console.log('No Provider found');
       }
