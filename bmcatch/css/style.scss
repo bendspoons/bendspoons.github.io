@@ -1,0 +1,115 @@
+@import '_animate.min';
+@import '_font-awesome.min';
+
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('fonts/BebasNeue-Regular.eot');
+    src: url('fonts/BebasNeue-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/BebasNeue-Regular.woff2') format('woff2'),
+        url('fonts/BebasNeue-Regular.woff') format('woff'),
+        url('fonts/BebasNeue-Regular.ttf') format('truetype'),
+        url('fonts/BebasNeue-Regular.svg#BebasNeue-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+body {
+  font-family: "Bebas Neue",sans-serif;
+  font-size: 1.2rem;
+
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+#bottom-bar {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background:#1a0c03;
+  color: #fff;
+  z-index: 444;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  #score {
+    flex-grow: 4;
+    text-align:left;
+    padding-top: .4em;
+    padding-bottom: .4em;
+    padding-left: .5em;
+  }
+
+  #timer {
+    flex-grow: 4;
+    text-align:right;
+    padding-top: .4em;
+    padding-bottom: .4em;
+    padding-right: .5em;
+  }
+}
+
+.score{
+  font-size: 500px;
+  z-index: 20;
+  font-family: arial;
+  color: #d7e4d9;
+  user-select:none;
+  width:100%;
+  text-align:center;
+}
+
+.counter {
+  width:100%;
+  margin: 0 auto;
+  text-align:center;
+  font-family:arial;
+  color:red;
+  font-weight:bold;
+  padding-top:10px;
+  font-size:20px;
+  position:relative;
+  z-index:9999;
+}
+
+.game{
+  background-image: url('assets/bm_bg_1.jpg');
+  background-repeat: no-repeat;
+  background-position: top center;
+  width:100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 779px) {
+  .game{
+    background-size: auto 100% !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .game{
+    background-size: 100% auto !important;
+  }
+}
+
+.box{
+
+  width: 100px;
+  height:100px;
+  position:absolute;
+  top: -150px;
+  transition: transform 1.5s linear;
+  cursor: pointer;
+  z-index:100;
+}
+
+.move{
+   transform:translateY(120vh);
+}

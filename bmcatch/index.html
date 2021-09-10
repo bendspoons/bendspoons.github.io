@@ -1,16 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <title>Burningmoon</title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="app.min.css">
   </head>
   <body>
     <div class="game">
-      <div class="counter" id= "counter">00s</div>
-      <div class="score">00</div>
+      <div>&nbsp;</div>
     </div>
+
+    <div id="bottom-bar">
+      <div id="score">
+        <i class="fa fa-trophy"></i>
+        <span>---</span>
+      </div>
+      <div id="timer">
+        <i class="fa fa-clock-o"></i>
+        <span>---</span>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js.js"></script>
+    <script type="text/javascript" src="app.min.js"></script>
   </body>
 </html>
