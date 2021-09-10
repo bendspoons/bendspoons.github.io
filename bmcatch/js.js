@@ -185,7 +185,7 @@ for (i = 0; i < 10; i++) {
   dropBox();
 }
 
-$(document).on('click', '.box', function(){
+$(document).on('click touchstart', '.box', function(){
   if($(this).data("test")){
     score += 1;
   } else {
