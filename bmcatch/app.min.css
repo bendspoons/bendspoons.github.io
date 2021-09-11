@@ -4278,6 +4278,33 @@ body {
   overflow: hidden;
 }
 
+#introductionModal, #gameoverModal {
+  background: #fff;
+  text-align: center;
+  display: none;
+  z-index: 1200 !important;
+}
+#introductionModal .inner, #gameoverModal .inner {
+  border-radius: 0.8em;
+  padding: 0.4em 1em 1em 1em;
+}
+#introductionModal .inner .start-game-btn, #introductionModal .inner .restart-game-btn, #gameoverModal .inner .start-game-btn, #gameoverModal .inner .restart-game-btn {
+  background: #333;
+  color: #fff;
+  width: 220px;
+  margin: 1em auto;
+  padding: 0.6em;
+}
+#introductionModal .list, #gameoverModal .list {
+  text-align: left;
+}
+
+#gameoverModal {
+  background: #fff;
+  display: none;
+  z-index: 1200 !important;
+}
+
 #bottom-bar {
   display: flex;
   width: 100%;
@@ -4291,44 +4318,29 @@ body {
   left: 0;
 }
 #bottom-bar #score {
-  flex-grow: 4;
+  flex-basis: 5rem;
   text-align: left;
   padding-top: 0.4em;
   padding-bottom: 0.4em;
+  padding-bottom: 0.4em;
   padding-left: 0.5em;
 }
+#bottom-bar #lastlog {
+  flex-basis: 20rem;
+}
+#bottom-bar #difficulty {
+  flex-basis: 5rem;
+  font-size: 0.9em;
+}
 #bottom-bar #timer {
-  flex-grow: 4;
+  flex-basis: 5rem;
   text-align: right;
   padding-top: 0.4em;
   padding-bottom: 0.4em;
   padding-right: 0.5em;
 }
 
-.score {
-  font-size: 500px;
-  z-index: 20;
-  font-family: arial;
-  color: #d7e4d9;
-  user-select: none;
-  width: 100%;
-  text-align: center;
-}
-
-.counter {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  font-family: arial;
-  color: red;
-  font-weight: bold;
-  padding-top: 10px;
-  font-size: 20px;
-  position: relative;
-  z-index: 9999;
-}
-
-.game {
+#game {
   background-image: url("assets/bm_bg_1.jpg");
   background-repeat: no-repeat;
   background-position: top center;
@@ -4339,12 +4351,12 @@ body {
 }
 
 @media only screen and (max-width: 779px) {
-  .game {
+  #game {
     background-size: auto 100% !important;
   }
 }
 @media only screen and (min-width: 780px) {
-  .game {
+  #game {
     background-size: 100% auto !important;
   }
 }
@@ -4360,4 +4372,52 @@ body {
 
 .move {
   transform: translateY(120vh);
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }

@@ -3,11 +3,59 @@
   <head>
   	<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>Burningmoon</title>
+    <title>Burningmoon Catch</title>
     <link rel="stylesheet" href="app.min.css">
   </head>
   <body>
-    <div class="game">
+
+    <div id="introductionModal" class="modal">
+      <div class="inner">
+        <h2>Burningmoon Catch</h2>
+        <div>
+          Catch as much Burningmoon as possible, simple by clicking on it. But beware, dont click on the bad ones!
+        </div>
+
+        <p class="start-game-btn">
+          <i class="fa fa-gamepad"></i><br />
+          PLAY THE GAME
+        </p>
+
+        <h3>Good</h3>
+        <div class="list good-list">
+
+        </div>
+        <h3>Bad</h3>
+        <div class="list bad-list">
+
+        </div>
+      </div>
+    </div>
+
+    <div id="gameoverModal" class="modal">
+      <div class="inner">
+        <h2>GAME OVER</h2>
+        <div>
+          <span class="finalPoints"></span> points
+        </div>
+
+        <p>
+          Congratulations, you mastered the game!
+        </p>
+
+        <p class="restart-game-btn">
+          <i class="fa fa-gamepad"></i><br />
+          RESTART GAME
+        </p>
+
+        <h3>Stats</h3>
+        <div class="list stat-list">
+
+        </div>
+        <small>Points are rounded to full</small>
+      </div>
+    </div>
+
+    <div id="game">
       <div>&nbsp;</div>
     </div>
 
@@ -16,13 +64,38 @@
         <i class="fa fa-trophy"></i>
         <span>---</span>
       </div>
+      <div id="lastlog">
+        <span>---</span>
+      </div>
+      <div id="difficulty">
+        <span>---</span>
+      </div>
       <div id="timer">
         <i class="fa fa-clock-o"></i>
         <span>---</span>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="lib/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="app.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+        console.log('init')
+
+        BurningmoonCatch.initialize({
+          gameHandle                : '#game',
+          scoreHandle               : '#score > span',
+          lastlogHandle             : '#lastlog > span',
+          difficultyHandle          : '#difficulty > span',
+          timerHandle               : '#timer > span',
+          catchableHandle           : '.box',
+          introductionModalHandle   : '#introductionModal',
+          gamoverModalHandle        : '#gameoverModal'
+        }).setDefaults().introduce();
+
+        console.log('BurningmoonCatch', BurningmoonCatch);
+      })();
+    </script>
+
   </body>
 </html>
